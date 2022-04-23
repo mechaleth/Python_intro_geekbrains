@@ -24,8 +24,9 @@ while True:
             break
     except ValueError:
         continue
-
-if number > my_list[0]:
+if len(my_list) == 0:
+    my_list.append(number)
+elif number > my_list[0]:
     my_list.insert(0, number)
 else:
     for indx in range(len(my_list) - 1, -1, -1):
