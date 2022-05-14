@@ -32,18 +32,27 @@ class Clothes(abc.ABC):
     def cloth_consumption(self):
         pass
 
+    @abc.abstractmethod
+    def cloth_size(self, value):
+        pass
+
 
 class Coat(Clothes):
     def __init__(self, size: float, name: str = "Coat"):
-        self.cloth_consumption = size
-        super().__init__(name)
+        if size > 0:
+            self._size = size
+            super().__init__(name)
 
     @property
     def cloth_consumption(self):
         return round(self._size / 6.5 + 0.5, 3)
 
-    @cloth_consumption.setter
-    def cloth_consumption(self, value):
+    @property
+    def cloth_size(self):
+        return self._size
+
+    @cloth_size.setter
+    def cloth_size(self, value):
         if value > 0:
             self._size = value
 
@@ -58,8 +67,12 @@ class Suit(Clothes):
     def cloth_consumption(self):
         return round(2 * self._height + 0.3, 3)
 
-    @cloth_consumption.setter
-    def cloth_consumption(self, value):
+    @property
+    def cloth_size(self):
+        return self._height
+
+    @cloth_size.setter
+    def cloth_size(self, value):
         if value > 0:
             self._height = value
 
@@ -69,7 +82,7 @@ if __name__ == "__main__":
     cloth_str = "It needs {consumption} of cloth to make a {name}"
     for clothe in cloth_list:
         print(cloth_str.format(consumption=clothe.cloth_consumption, name=clothe.name))
-    cloth_list[0].cloth_consumption = 52
+    cloth_list[0].cloth_size = 52
     # cloth_list.append(Clothes())
 
     for clothe in cloth_list:
