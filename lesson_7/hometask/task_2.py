@@ -39,9 +39,8 @@ class Clothes(abc.ABC):
 
 class Coat(Clothes):
     def __init__(self, size: float, name: str = "Coat"):
-        if size > 0:
-            self._size = size
-            super().__init__(name)
+        self.cloth_size = size
+        super().__init__(name)
 
     @property
     def cloth_consumption(self):
@@ -59,9 +58,8 @@ class Coat(Clothes):
 
 class Suit(Clothes):
     def __init__(self, height: float, name: str = "Suit"):
-        if height > 0:
-            self._height = height
-            super().__init__(name)
+        self.cloth_size = height
+        super().__init__(name)
 
     @property
     def cloth_consumption(self):
